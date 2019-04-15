@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC32EA5B225F4FE2006DB993 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32EA5A225F4FE2006DB993 /* ViewModel.swift */; };
+		ACA870EA2264786F00A91968 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA870E92264786F00A91968 /* Test.swift */; };
 		C926DADD1D7581BB00477020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C926DADC1D7581BB00477020 /* AppDelegate.swift */; };
 		C926DADF1D7581BB00477020 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C926DADE1D7581BB00477020 /* ViewController.swift */; };
 		C926DAE21D7581BB00477020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C926DAE01D7581BB00477020 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		AC32EA5A225F4FE2006DB993 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		ACA870E92264786F00A91968 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		C926DAD91D7581BB00477020 /* CountOnMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountOnMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C926DADC1D7581BB00477020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C926DADE1D7581BB00477020 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		C926DAF01D7581BB00477020 /* CountOnMeTests */ = {
 			isa = PBXGroup;
 			children = (
+				ACA870E92264786F00A91968 /* Test.swift */,
 				C926DAF11D7581BB00477020 /* Zozor_Tests.swift */,
 				C926DAF31D7581BB00477020 /* Info.plist */,
 			);
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C926DAF21D7581BB00477020 /* Zozor_Tests.swift in Sources */,
+				ACA870EA2264786F00A91968 /* Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
