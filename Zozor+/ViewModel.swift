@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Digit: Int,CaseIterable {
+enum Operand: Int,CaseIterable {
     case digit0 = 0
     case digit1
     case digit2
@@ -21,18 +21,18 @@ enum Digit: Int,CaseIterable {
     case digit9
 }
 
-enum OperatoR: String {
-    case Plus = "+"
-    case Minus = "-"
-    case Division = "/"
-    case Equal = "="
+enum OperatoR: Int,CaseIterable {
+    case plus = 1
+    case minus
+    case time
+    case equal
 }
 
 final class ViewModel {
     
     // MARK: - Outputs
     
-    var navigateToScreen: ((nextScreen) -> Void)?
+    //var navigateToScreen: ((NextScreen) -> Void)?
     var displayText: ((String) -> Void)?
 
 
@@ -40,13 +40,15 @@ final class ViewModel {
     // MARK: - Inputs
     
     func viewDidLoad() {
-        
+            displayText?("\(Operand.digit0.rawValue)")
     }
     func didPressOperator(at index: Int) {
-        
+       displayText?("\(index)")
     }
-    func didPressOperand(at index: String) {
-       
+    
+    func didPressOperand(at index: Int) {
+        guard let operand = OperatoR(rawValue: index) else {return}
+        displayText?("\(operand)")
     }
     
 }
