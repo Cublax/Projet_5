@@ -65,14 +65,14 @@ final class ViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
     
-    func testGivenAViewModel_WhenDidPressOperator_ThenDisplayedTextReturnsCorrectValueDivision() {
+    func testGivenAViewModel_WhenDidPressOperator_ThenDisplayedTextReturnsCorrectValueTimes() {
         let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
         viewModel.displayText = { text in
             if counter == 1 {
-                XCTAssertEqual(text, "/")
+                XCTAssertEqual(text, "*")
                 expectation.fulfill()
             }
             counter += 1
@@ -359,7 +359,7 @@ final class ViewModelTests: XCTestCase {
         var counter = 0
         viewModel.displayText = { text in
             if counter == 4 {
-                XCTAssertEqual(text, "2")
+                XCTAssertEqual(text, "4")
                 expectation.fulfill()
             }
             counter += 1
@@ -367,27 +367,15 @@ final class ViewModelTests: XCTestCase {
         
         viewModel.viewDidLoad()
         
-        viewModel.didPressOperand(at: 1)
-        viewModel.didPressOperator(at: 2)
         viewModel.didPressOperand(at: 2)
         viewModel.didPressOperator(at: 2)
+        viewModel.didPressOperand(at: 2)
+        viewModel.didPressOperator(at: 3)
+        
+         waitForExpectations(timeout: 1.0, handler: nil)
     }
     
-    
-    func testGivenAViewModel_WhenDidAnAdditionWithNegativeNumber_ThenDisplayedTextIsCorrectlyReturnedAndPossitif() {
-        //retourner un cas ou le resultat est positif
-    }
-    func testGivenAViewModel_WhenDidAnAdditionWithNegativeNumber_ThenDisplayedTextIsCorrectlyReturnedAndNegative() {
-        //retourner un cas ou le resultat est negatif
-    }
-    
-    func testGivenAViewModel_WhenDidASoustractionWithNegativeReturn_ThenDisplayedTextIsCorrectlyReturned()  {
-        //Retourner un nombre négatif - soustraction
-    }
-    
-    func testGivenAViewModel_WhenDidAMultiplicationWithNegativeNumber_ThenDisplayedTextIsCorrectlyReturned() {
-        // retourner un nombre negatif - Multiplication
-    }
+   
     
     
     func testGivenAViewModel_WhenDidAMultiplicationByZero_ThenDisplayedTextIsCorrectlyReturned() {
@@ -397,7 +385,7 @@ final class ViewModelTests: XCTestCase {
         var counter = 0
         viewModel.displayText = { text in
             if counter == 4 {
-                XCTAssertEqual(text, "0")
+                XCTAssertEqual(text,"0")
                 expectation.fulfill()
             }
             counter += 1
@@ -405,10 +393,12 @@ final class ViewModelTests: XCTestCase {
         
         viewModel.viewDidLoad()
         
-        viewModel.didPressOperand(at: 1)
+        viewModel.didPressOperand(at: 5)
         viewModel.didPressOperator(at: 2)
         viewModel.didPressOperand(at: 0)
-        viewModel.didPressOperator(at: 0)
+        viewModel.didPressOperator(at: 3)
+        
+         waitForExpectations(timeout: 1.0, handler: nil)
     }
     
     func testGivenAViewModel_WhenOperationWithNoDigit_ThenDisplayIsCorrectlyReturned() {
@@ -418,7 +408,7 @@ final class ViewModelTests: XCTestCase {
         var counter = 0
         viewModel.displayText = { text in
             if counter == 3 {
-                XCTAssertEqual(text, "0")
+                XCTAssertEqual(text, "-")
                 expectation.fulfill()
             }
             counter += 1
@@ -426,12 +416,10 @@ final class ViewModelTests: XCTestCase {
         
         viewModel.viewDidLoad()
         
-        viewModel.didPressOperator(at: 1)
         viewModel.didPressOperator(at: 2)
-        viewModel.didPressOperator(at: 3)
+        viewModel.didPressOperator(at: 2)
+        viewModel.didPressOperator(at: 1)
+        
+         waitForExpectations(timeout: 1.0, handler: nil)
     }
-    
-    //Tester tout les cas de figures possibles Opération / Valeurs de retour
-    //  division par 0 / cliqué sur operateur et non chiffres
-    
 }

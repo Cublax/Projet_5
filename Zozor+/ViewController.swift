@@ -34,7 +34,8 @@ final class ViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private var viewModel: ViewModel!
+    private var viewModel = ViewModel()
+ 
     
     // MARK: - View Life Cycle
     
@@ -48,10 +49,12 @@ final class ViewController: UIViewController {
     private func bind(to viewModel: ViewModel) {
         
         viewModel.displayText = { [weak self] text in
-            //Ajouter le texte
+            self?.textView.text = text
         }
         
-        //navigate to screen
+        //viewModel.navigateToScreen = {[weak self] screen in
+            
+       // }
         
     }
     
@@ -65,7 +68,8 @@ final class ViewController: UIViewController {
     @IBAction func pressedOperator(_ sender: UIButton) {
         viewModel.didPressOperator(at: sender.tag)
     }
-    
+
+
     // MARK: - Display alerts
     
 }

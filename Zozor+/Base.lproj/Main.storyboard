@@ -220,7 +220,7 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="pressedOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vIW-ML-Ogo"/>
+                                                    <action selector="pressedOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CCG-4n-fhC"/>
                                                 </connections>
                                             </button>
                                         </subviews>
