@@ -10,112 +10,147 @@ import Foundation
 
 final class ViewModel {
     
-    let dataSource = DataSource()
+    // MARK: - Private properties
+    
+    private let dataSource = DataSource()
     
     private var firstNumber: [String] = []
+    
     private var secondNumber: [String] = []
+    
     private var operators: [String] = []
-    private var result = "0"
+    
+    private var copyOperator = ""
+    private var copySecondNumber = ""
+    
+    private var result = "0" {
+        didSet {
+            displayedText?(result)
+        }
+    }
+    
+    // MARK: - Public Properties
+    
+    enum Alert {
+        case error(title: String, message: String, actionTitle: String)
+    }
     
     // MARK: - Outputs
     
-    // var navigateToScreen: ((NextScreen) -> Void)?
-    var displayText: ((String) -> Void)?
+    var alert: ((Alert) -> Void)?
+    
+    var displayedText: ((String) -> Void)?
     
     // MARK: - Inputs
     
     func viewDidLoad() {
-            displayText?("\(Operand.digit0.rawValue)")
+        displayedText?("\(Operand.digit0.rawValue)")
     }
     
     func didPressOperator(at index: Int) {
         guard index < dataSource.operators.count else  {return}
         let sign = dataSource.operators[index]
         if case .equal = sign {
-            equalButton()
-            
+            proceedEqual()
         } else {
             addOperator(with: sign.rawValue)
-            displayText?(operators.joined())
+            displayedText?(operators.joined())
         }
     }
     
-     func didPressOperand(at index: Int) {
+    func didPressOperand(at index: Int) {
         guard index < dataSource.operand.count else  {return}
         let digit = dataSource.operand[index]
         addDigit(with: digit.rawValue)
     }
     
-    
+    func didPressButtonClear() {
+        clearAllProperties()
+        displayedText?("0")
+    }
     
     // MARK: - Methods
     
-    private func equalButton() {
-        if !firstNumber.isEmpty && !secondNumber.isEmpty && !operators.isEmpty {
+    private func proceedEqual() {
+        if !firstNumber.isEmpty, !secondNumber.isEmpty, !operators.isEmpty {
             calculate()
-        } else {
-            clear()
-            result = "="
+        } else if firstNumber.isEmpty, secondNumber.isEmpty, operators.isEmpty, copyOperator != "", copySecondNumber != "" {
+        firstNumber.append(result)
+        operators.append(copyOperator)
+        secondNumber.append(copySecondNumber)
+        calculate()
+    } else {
+            cleartemporayProperties()
+            result = "0"
+            alert?(.error(title: "Wrong entry", message: "This can not be calculated", actionTitle: "OK"))
         }
-        displayText?(result)
     }
     
     private func addDigit(with number: String) {
         if operators.isEmpty {
             firstNumber.append(number)
-            displayText?(firstNumber.joined())
+            displayedText?(firstNumber.joined())
         } else if !(operators.isEmpty) && firstNumber.isEmpty {
             operators = []
             firstNumber.append(number)
-            displayText?(firstNumber.joined())
+            displayedText?(firstNumber.joined())
         }else {
             secondNumber.append(number)
-            displayText?(secondNumber.joined())
+            displayedText?(secondNumber.joined())
         }
     }
     
-    private func addOperator(with operatore: String) {
-        if !firstNumber.isEmpty && !operators.isEmpty && !secondNumber.isEmpty {
+    private func addOperator(with `operator`: String) {
+        if !firstNumber.isEmpty, !operators.isEmpty, !secondNumber.isEmpty {
             calculate()
             firstNumber.append(result)
-            operators.append(operatore)
-        }else if firstNumber.isEmpty && operators.isEmpty && secondNumber.isEmpty && !result.isEmpty {
+            operators.append(`operator`)
+        }else if firstNumber.isEmpty, operators.isEmpty, secondNumber.isEmpty, !result.isEmpty {
             firstNumber.append(result)
-            operators.append(operatore)
+            operators.append(`operator`)
         } else {
             operators = []
-            operators.append(operatore)
+            operators.append(`operator`)
         }
     }
     
     private func calculate() {
         var total = 0
-        
-        if let nbUn = Int(self.firstNumber.joined()), let nbTwo = Int(self.secondNumber.joined()), let oper = String(self.operators.joined()) {
-            if let `operator` = Operators(rawValue: oper) {
+        if let firstNumber = Int(self.firstNumber.joined()), let secondNumber = Int(self.secondNumber.joined()) {
+            if let `operator` = Operators(rawValue: String(self.operators.joined())) {
                 switch `operator` {
                 case .plus:
-                    total = nbUn + nbTwo
+                    total = firstNumber + secondNumber
                 case .minus:
-                    total = nbUn - nbTwo
+                    total = firstNumber - secondNumber
                 case .times:
-                    total = nbUn * nbTwo
+                    total = firstNumber * secondNumber
                 default:
                     break
                 }
-                clear()
+                copyTemporaryProperties()
+                cleartemporayProperties()
                 result = String(total)
             }
-        } else {
-            clear()
         }
     }
     
-    
-    private func clear() {
+    private func cleartemporayProperties() {
         firstNumber = []
         secondNumber = []
         operators = []
     }
     
+    private func clearAllProperties() {
+        cleartemporayProperties()
+        copyOperator = ""
+        copySecondNumber = ""
+    }
+    
+    private func copyTemporaryProperties() {
+        copyOperator = ""
+        copySecondNumber = ""
+        copyOperator = String(self.operators.joined())
+        copySecondNumber = self.secondNumber.joined()
+    }
 }

@@ -12,8 +12,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Outlets
     
-    
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet private weak var textView: UITextView!
     
     @IBOutlet private var buttonZero: UIView!
     @IBOutlet private var buttonOne: UIView!
@@ -31,11 +30,10 @@ final class ViewController: UIViewController {
     @IBOutlet private var buttonTime: UIView!
     @IBOutlet private var buttonEqual: UIView!
     
-    
     // MARK: - Private Properties
     
-    private var viewModel = ViewModel()
- 
+    private lazy var viewModel = ViewModel()
+    
     
     // MARK: - View Life Cycle
     
@@ -48,16 +46,18 @@ final class ViewController: UIViewController {
     
     private func bind(to viewModel: ViewModel) {
         
-        viewModel.displayText = { [weak self] text in
+        viewModel.displayedText = { [weak self] text in
             self?.textView.text = text
         }
         
-        //viewModel.navigateToScreen = {[weak self] screen in
-            
-       // }
-        
+        viewModel.alert = { [weak self] alert in
+            guard let self = self else { return }
+            switch alert {
+            case .error(title: let title, message: let message, actionTitle: let actionTitle):
+                self.displayAlert(with: title, message: message, actionTitle: actionTitle)
+            }
+        }
     }
-    
     
     // MARK: - Actions
     
@@ -68,8 +68,18 @@ final class ViewController: UIViewController {
     @IBAction func pressedOperator(_ sender: UIButton) {
         viewModel.didPressOperator(at: sender.tag)
     }
-
-
+    
+    @IBAction func pressedClear(_ sender: UIButton) {
+        viewModel.didPressButtonClear()
+    }
     // MARK: - Display alerts
     
+    private func displayAlert(with title: String, message: String, actionTitle: String) {
+        let alertController = UIAlertController()
+        alertController.title = title
+        alertController.message = message
+        let action = UIAlertAction(title: actionTitle, style: .cancel, handler: nil)
+        alertController.addAction(action)
+        self.show(alertController, sender: nil)
+    }
 }

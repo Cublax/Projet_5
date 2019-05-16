@@ -30,8 +30,13 @@ enum Operators: String {
 
 final class DataSource {
     
+    // MARK: - Properties
+    
     var operand: [Operand] = []
+    
     var operators: [Operators] = []
+    
+    // MARK: - Initializer
     
     init() {
         operand = [

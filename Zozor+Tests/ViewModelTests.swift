@@ -11,11 +11,17 @@ import XCTest
 
 final class ViewModelTests: XCTestCase {
     
+    var viewModel: ViewModel!
+    
+    override func setUp() {
+        super.setUp()
+        viewModel = ViewModel()
+    }
+    
     func testGivenAViewModel_WhenViewDidLoad_ThenDisplayedTextReturnsCorrectValue() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             XCTAssertEqual(text, "0")
             expectation.fulfill()
         }
@@ -26,11 +32,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperator_ThenDisplayedTextReturnsCorrectValuePlus() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "+")
                 expectation.fulfill()
@@ -46,11 +51,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperator_ThenDisplayedTextReturnsCorrectValueMinus() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "-")
                 expectation.fulfill()
@@ -66,11 +70,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperator_ThenDisplayedTextReturnsCorrectValueTimes() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "*")
                 expectation.fulfill()
@@ -86,13 +89,12 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperator_ThenDisplayedTextReturnsCorrectValueEqual() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
-                XCTAssertEqual(text, "=")
+                XCTAssertEqual(text, "0")
                 expectation.fulfill()
             }
             counter += 1
@@ -107,11 +109,10 @@ final class ViewModelTests: XCTestCase {
     
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueZero() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "0")
                 expectation.fulfill()
@@ -127,11 +128,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueOne() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "1")
                 expectation.fulfill()
@@ -147,11 +147,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueTwo() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "2")
                 expectation.fulfill()
@@ -167,11 +166,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueThree() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "3")
                 expectation.fulfill()
@@ -187,11 +185,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueFour() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "4")
                 expectation.fulfill()
@@ -207,11 +204,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueFive() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "5")
                 expectation.fulfill()
@@ -227,11 +223,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueSix() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "6")
                 expectation.fulfill()
@@ -247,11 +242,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueSeven() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "7")
                 expectation.fulfill()
@@ -267,11 +261,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueHeight() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "8")
                 expectation.fulfill()
@@ -287,11 +280,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidPressOperand_ThenDisplayedTextReturnsCorrectValueNine() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: " returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 1 {
                 XCTAssertEqual(text, "9")
                 expectation.fulfill()
@@ -307,11 +299,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidAnAddition_ThenDisplayedTextIsCorrectlyReturned() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 4 {
                 XCTAssertEqual(text, "2")
                 expectation.fulfill()
@@ -330,11 +321,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidASoustraction_ThenDisplayedTextIsCorrectlyReturned() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 4 {
                 XCTAssertEqual(text, "0")
                 expectation.fulfill()
@@ -353,11 +343,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenDidAMultiplication_ThenDisplayedIsCorrectlyReturned() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 4 {
                 XCTAssertEqual(text, "4")
                 expectation.fulfill()
@@ -379,11 +368,10 @@ final class ViewModelTests: XCTestCase {
     
     
     func testGivenAViewModel_WhenDidAMultiplicationByZero_ThenDisplayedTextIsCorrectlyReturned() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 4 {
                 XCTAssertEqual(text,"0")
                 expectation.fulfill()
@@ -402,11 +390,10 @@ final class ViewModelTests: XCTestCase {
     }
     
     func testGivenAViewModel_WhenOperationWithNoDigit_ThenDisplayIsCorrectlyReturned() {
-        let viewModel = ViewModel()
         let expectation = self.expectation(description: "Returned text")
         
         var counter = 0
-        viewModel.displayText = { text in
+        viewModel.displayedText = { text in
             if counter == 3 {
                 XCTAssertEqual(text, "-")
                 expectation.fulfill()
@@ -421,5 +408,42 @@ final class ViewModelTests: XCTestCase {
         viewModel.didPressOperator(at: 1)
         
          waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    
+    func testGivenAViewModel_WhendidpressedClearButton_ThenEmptyTemporaryPropertiesAndDisplay0() {
+        let expectation = self.expectation(description: "Display 0")
+        
+        var counter = 0
+        viewModel.displayedText = { text in
+            if counter == 3 {
+                XCTAssertEqual(text, "0")
+                expectation.fulfill()
+            }
+            counter += 1
+        }
+        
+        
+        viewModel.viewDidLoad()
+        viewModel.didPressOperator(at: 2)
+        viewModel.didPressOperator(at: 2)
+        viewModel.didPressButtonClear()
+        
+         waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    
+    func testGivenAViewModel_WhenDidntSetASecondNumberToCalculate_ThenReturnErrorMessage() {
+        let expectation = self.expectation(description: "Display error")
+        
+        
+        
+        viewModel.viewDidLoad()
+        viewModel.didPressOperand(at: 2)
+        viewModel.didPressOperator(at: 2)
+        viewModel.didPressOperator(at: 3)
+        
+        XCTAssertNil(viewModel.alert)
+        expectation.fulfill()
+        
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
 }
