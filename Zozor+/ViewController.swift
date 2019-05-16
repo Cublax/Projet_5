@@ -34,7 +34,6 @@ final class ViewController: UIViewController {
     
     private lazy var viewModel = ViewModel()
     
-    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -50,10 +49,10 @@ final class ViewController: UIViewController {
             self?.textView.text = text
         }
         
-        viewModel.alert = { [weak self] alert in
+        viewModel.navigateTo = { [weak self] screen in
             guard let self = self else { return }
-            switch alert {
-            case .error(title: let title, message: let message, actionTitle: let actionTitle):
+            switch screen {
+            case .alert(title: let title, message: let message, actionTitle: let actionTitle):
                 self.displayAlert(with: title, message: message, actionTitle: actionTitle)
             }
         }

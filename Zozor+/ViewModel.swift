@@ -31,13 +31,13 @@ final class ViewModel {
     
     // MARK: - Public Properties
     
-    enum Alert {
-        case error(title: String, message: String, actionTitle: String)
+    enum NextScreen {
+        case alert(title: String, message: String, actionTitle: String)
     }
     
     // MARK: - Outputs
     
-    var alert: ((Alert) -> Void)?
+    var navigateTo: ((NextScreen) -> Void)?
     
     var displayedText: ((String) -> Void)?
     
@@ -75,14 +75,14 @@ final class ViewModel {
         if !firstNumber.isEmpty, !secondNumber.isEmpty, !operators.isEmpty {
             calculate()
         } else if firstNumber.isEmpty, secondNumber.isEmpty, operators.isEmpty, copyOperator != "", copySecondNumber != "" {
-        firstNumber.append(result)
-        operators.append(copyOperator)
-        secondNumber.append(copySecondNumber)
-        calculate()
-    } else {
+            firstNumber.append(result)
+            operators.append(copyOperator)
+            secondNumber.append(copySecondNumber)
+            calculate()
+        } else {
             cleartemporayProperties()
             result = "0"
-            alert?(.error(title: "Wrong entry", message: "This can not be calculated", actionTitle: "OK"))
+            navigateTo?(.alert(title: "Wrong entry", message: "This can not be calculated", actionTitle: "OK"))
         }
     }
     
@@ -94,7 +94,7 @@ final class ViewModel {
             operators = []
             firstNumber.append(number)
             displayedText?(firstNumber.joined())
-        }else {
+        } else {
             secondNumber.append(number)
             displayedText?(secondNumber.joined())
         }
@@ -152,5 +152,14 @@ final class ViewModel {
         copySecondNumber = ""
         copyOperator = String(self.operators.joined())
         copySecondNumber = self.secondNumber.joined()
+    }
+}
+
+extension ViewModel.NextScreen: Equatable {
+    public static func ==(lhs: ViewModel.NextScreen, rhs: ViewModel.NextScreen) -> Bool {
+        switch (lhs, rhs) {
+        case let (.alert(title1, message1, actionTitle1), .alert(title2, message2, actionTitle2)):
+            return title1 == title2 && message1 == message2 && actionTitle1 == actionTitle2
+        }
     }
 }

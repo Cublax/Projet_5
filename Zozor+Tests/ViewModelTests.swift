@@ -434,15 +434,18 @@ final class ViewModelTests: XCTestCase {
     func testGivenAViewModel_WhenDidntSetASecondNumberToCalculate_ThenReturnErrorMessage() {
         let expectation = self.expectation(description: "Display error")
         
-        
+        viewModel.navigateTo = { screen in
+            XCTAssertEqual(screen, ViewModel.NextScreen.alert(title: "Wrong entry",
+                                                              message: "This can not be calculated",
+                                                              actionTitle: "OK"))
+            expectation.fulfill()
+        }
         
         viewModel.viewDidLoad()
         viewModel.didPressOperand(at: 2)
         viewModel.didPressOperator(at: 2)
-        viewModel.didPressOperator(at: 3)
         
-        XCTAssertNil(viewModel.alert)
-        expectation.fulfill()
+        viewModel.didPressOperator(at: 3)
         
         waitForExpectations(timeout: 1.0, handler: nil)
     }
